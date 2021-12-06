@@ -1,20 +1,15 @@
 package org.camunda.test;
 
 
-import com.camunda.example.service.LoggerDelegate;
 import com.camunda.example.service.LoggerTaskListener;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.mock.Mocks;
-import org.camunda.bpm.spring.boot.starter.test.helper.AbstractProcessEngineRuleTest;
-import org.camunda.spin.plugin.impl.SpinProcessEnginePlugin;
 import org.camunda.spin.plugin.variable.SpinValues;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*;
 
