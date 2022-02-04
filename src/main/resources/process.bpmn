@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1">
   <bpmn:process id="example-process" isExecutable="true">
+    <bpmn:extensionElements>
+      <camunda:properties>
+        <camunda:property name="myProperty1" value="static1" />
+        <camunda:property name="MyProperty2" value="static2" />
+      </camunda:properties>
+    </bpmn:extensionElements>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
     </bpmn:startEvent>
@@ -20,6 +26,10 @@
       <bpmn:userTask id="DoSomethingTask" name="Do something">
         <bpmn:extensionElements>
           <camunda:taskListener delegateExpression="${listener}" event="create" id="" />
+          <camunda:properties>
+            <camunda:property name="myPropertyOnTask1" value="onTask1" />
+            <camunda:property name="myPropertyOnTask2" value="onTask2" />
+          </camunda:properties>
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_1ozscc1</bpmn:incoming>
         <bpmn:outgoing>Flow_13c55qv</bpmn:outgoing>
@@ -42,37 +52,31 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="example-process">
-      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
-        <di:waypoint x="188" y="220" />
-        <di:waypoint x="240" y="220" />
+      <bpmndi:BPMNEdge id="Flow_0vd7grb_di" bpmnElement="Flow_0vd7grb">
+        <di:waypoint x="340" y="220" />
+        <di:waypoint x="390" y="220" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0f42cm9_di" bpmnElement="Flow_0f42cm9">
         <di:waypoint x="940" y="230" />
         <di:waypoint x="1002" y="230" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0vd7grb_di" bpmnElement="Flow_0vd7grb">
-        <di:waypoint x="340" y="220" />
-        <di:waypoint x="390" y="220" />
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="188" y="220" />
+        <di:waypoint x="240" y="220" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_06dnp6f_di" bpmnElement="Event_06dnp6f">
-        <dc:Bounds x="1002" y="212" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="152" y="202" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1x32npw_di" bpmnElement="Activity_1x32npw">
-        <dc:Bounds x="240" y="180" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1j41ps2_di" bpmnElement="Activity_1j41ps2" isExpanded="true">
         <dc:Bounds x="390" y="40" width="550" height="380" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1ozscc1_di" bpmnElement="Flow_1ozscc1">
-        <di:waypoint x="538" y="230" />
-        <di:waypoint x="630" y="230" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_13c55qv_di" bpmnElement="Flow_13c55qv">
         <di:waypoint x="730" y="230" />
         <di:waypoint x="822" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ozscc1_di" bpmnElement="Flow_1ozscc1">
+        <di:waypoint x="538" y="230" />
+        <di:waypoint x="630" y="230" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1t22sw2_di" bpmnElement="Event_1t22sw2">
         <dc:Bounds x="502" y="212" width="36" height="36" />
@@ -82,6 +86,12 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_09m8czm_di" bpmnElement="DoSomethingTask">
         <dc:Bounds x="630" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_06dnp6f_di" bpmnElement="Event_06dnp6f">
+        <dc:Bounds x="1002" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1x32npw_di" bpmnElement="Activity_1x32npw">
+        <dc:Bounds x="240" y="180" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

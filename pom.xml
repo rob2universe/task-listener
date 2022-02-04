@@ -20,14 +20,14 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.5.4</version>
+        <version>2.5.8</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.camunda.bpm</groupId>
         <artifactId>camunda-bom</artifactId>
-        <version>7.16.0-ee</version>
+        <version>7.16.5-ee</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
@@ -80,12 +80,12 @@
     <dependency>
       <groupId>org.graalvm.js</groupId>
       <artifactId>js</artifactId>
-      <version>21.2.0</version>
+      <version>22.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.graalvm.js</groupId>
       <artifactId>js-scriptengine</artifactId>
-      <version>21.2.0</version>
+      <version>22.0.0</version>
     </dependency>
 
     <dependency>
@@ -94,6 +94,12 @@
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
+
+    <!-- required to read extension elements -->
+    <dependency>
+      <groupId>org.camunda.bpm.model</groupId>
+      <artifactId>camunda-bpmn-model</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -101,7 +107,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.5.4</version>
+        <version>2.5.8</version>
       </plugin>
     </plugins>
   </build>

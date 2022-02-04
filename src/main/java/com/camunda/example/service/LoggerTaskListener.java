@@ -19,6 +19,10 @@ package com.camunda.example.service;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
+import org.camunda.bpm.model.bpmn.BpmnModelException;
+import org.camunda.bpm.model.bpmn.instance.Process;
+import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperties;
+import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperty;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -34,7 +38,38 @@ public class LoggerTaskListener implements TaskListener {
         task.getTaskDefinitionKey(),
         task.getName().replaceAll("\n", " "),
         task.getProcessInstanceId(),
-        task.getExecutionId()
-    );
+        task.getExecutionId());
+
+    // log extension properties on Task
+    var taskExtElements = task.getBpmnModelElementInstance().getExtensionElements();
+    if (taskExtElements != null) {
+      try {
+        var camProps = taskExtElements.getElementsQuery()
+            .filterByType(CamundaProperties.class).singleResult();
+        if (camProps != null) {
+          for (CamundaProperty prop : camProps.getCamundaProperties())
+            log.info("Camunda property {} on task with value {}", prop.getCamundaName(), prop.getCamundaValue());
+        }
+      } catch (BpmnModelException e) {
+        log.error(e.getMessage());
+      }
+    }
+
+    // log extension properties on Process
+    for (Process p : task.getBpmnModelInstance().getModelElementsByType(Process.class)) {
+      var processExtElements = p.getExtensionElements();
+      if (processExtElements != null) {
+        try {
+          var camProps = processExtElements
+              .getElementsQuery().filterByType(CamundaProperties.class).singleResult();
+          if (camProps != null) {
+            for (CamundaProperty prop : camProps.getCamundaProperties())
+              log.info("Camunda property {} on process with value {}", prop.getCamundaName(), prop.getCamundaValue());
+          }
+        } catch (BpmnModelException e) {
+          log.error(e.getMessage());
+        }
+      }
+    }
   }
 }
